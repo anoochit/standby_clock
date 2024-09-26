@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Standby Clock',
       themeMode: ThemeMode.dark,
       theme: ThemeData(
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(
         brightness: Brightness.dark,
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }

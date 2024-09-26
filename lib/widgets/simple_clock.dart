@@ -23,7 +23,7 @@ class SimpleClock extends StatelessWidget {
                 const Duration(seconds: 1),
                 (_) => DateTime.now().hour,
               ),
-              hingeWidth: 1.0,
+              hingeWidth: 4.0,
               hingeLength: 10.0,
               itemBuilder: (buildContext, item) {
                 final value = DateFormat('HH').format(DateTime.now());
@@ -41,7 +41,7 @@ class SimpleClock extends StatelessWidget {
                   ),
                 );
               },
-              flipDirection: AxisDirection.down,
+              flipDirection: AxisDirection.left,
             ),
 
             buildSeparater(context, orientation),
@@ -53,7 +53,7 @@ class SimpleClock extends StatelessWidget {
                 const Duration(seconds: 1),
                 (_) => DateTime.now().minute,
               ),
-              hingeWidth: 1.0,
+              hingeWidth: 4.0,
               hingeLength: 10.0,
               itemBuilder: (buildContext, item) {
                 final value = DateFormat('mm').format(DateTime.now());
@@ -71,7 +71,7 @@ class SimpleClock extends StatelessWidget {
                   ),
                 );
               },
-              flipDirection: AxisDirection.down,
+              flipDirection: AxisDirection.left,
             ),
 
             buildSeparater(context, orientation),
@@ -83,7 +83,7 @@ class SimpleClock extends StatelessWidget {
                 const Duration(seconds: 1),
                 (_) => DateTime.now().second,
               ),
-              hingeWidth: 1.0,
+              hingeWidth: 4.0,
               hingeLength: 10.0,
               itemBuilder: (buildContext, item) {
                 final value = DateFormat('ss').format(DateTime.now());
@@ -101,7 +101,7 @@ class SimpleClock extends StatelessWidget {
                   ),
                 );
               },
-              flipDirection: AxisDirection.down,
+              flipDirection: AxisDirection.left,
             ),
           ],
         );
