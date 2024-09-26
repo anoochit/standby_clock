@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:standby_clock/widgets/ambient_sound_button.dart';
 
-import 'package:standby_clock/widgets/simple_clock.dart';
+import '../widgets/ambient_sound_button.dart';
+import '../widgets/simple_clock.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

@@ -41,7 +41,7 @@ class SimpleClock extends StatelessWidget {
                   ),
                 );
               },
-              flipDirection: AxisDirection.left,
+              flipDirection: AxisDirection.down,
             ),
 
             buildSeparater(context, orientation),
@@ -71,7 +71,7 @@ class SimpleClock extends StatelessWidget {
                   ),
                 );
               },
-              flipDirection: AxisDirection.left,
+              flipDirection: AxisDirection.down,
             ),
 
             buildSeparater(context, orientation),
@@ -101,7 +101,7 @@ class SimpleClock extends StatelessWidget {
                   ),
                 );
               },
-              flipDirection: AxisDirection.left,
+              flipDirection: AxisDirection.down,
             ),
           ],
         );
