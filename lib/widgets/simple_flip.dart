@@ -1,5 +1,6 @@
-import 'package:flip_board/flip_clock.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flip_board/flip_clock.dart';
 
 class SimpleFlip extends StatefulWidget {
   const SimpleFlip({super.key});

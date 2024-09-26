@@ -1,5 +1,6 @@
-import 'package:flip_board/flip_widget.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flip_board/flip_widget.dart';
 import 'package:intl/intl.dart';
 
 class SimpleClock extends StatelessWidget {
