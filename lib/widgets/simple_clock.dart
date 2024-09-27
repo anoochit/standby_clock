@@ -36,7 +36,7 @@ class SimpleClock extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .displayLarge!
-                          .apply(fontSizeFactor: 2.8),
+                          .apply(fontSizeFactor: 2.6),
                     ),
                   ),
                 );
@@ -66,7 +66,7 @@ class SimpleClock extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .displayLarge!
-                          .apply(fontSizeFactor: 2.8),
+                          .apply(fontSizeFactor: 2.6),
                     ),
                   ),
                 );
@@ -96,7 +96,7 @@ class SimpleClock extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .displayLarge!
-                          .apply(fontSizeFactor: 2.8),
+                          .apply(fontSizeFactor: 2.6),
                     ),
                   ),
                 );
@@ -119,7 +119,7 @@ class SimpleClock extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .displayLarge!
-              .apply(fontSizeFactor: 2.8),
+              .apply(fontSizeFactor: 2.6),
         ),
       ),
     );
