@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:standby_clock/data/settings.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
@@ -16,6 +17,8 @@ Future<void> main() async {
 
   // init shared preference
   await initSharePreference();
+
+  loadSettingsPreference();
 
   // set fullscreen for mobile platform
   setFullScreen();
@@ -41,7 +44,8 @@ initSharePreference() async {
 }
 
 loadSettingsPreference() {
-  settingThemeMode = prefs.getString('THEME_MODE') ?? 'system';
+  settingThemeMode = prefs.getString('THEME_MODE') ?? 'dark';
+  settingAmbientSound = prefs.getString('AMBIENT_SOUND') ?? 'sound/ocean.mp3';
 }
 
 class MyApp extends StatelessWidget {
@@ -55,15 +59,17 @@ class MyApp extends StatelessWidget {
             ? ThemeMode.light
             : ThemeMode.system;
 
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Standby Clock',
       themeMode: themeMode,
       theme: ThemeData(
         brightness: Brightness.light,
+        colorSchemeSeed: Colors.deepPurple,
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
+        colorSchemeSeed: Colors.deepPurple,
       ),
       home: const HomePage(),
     );

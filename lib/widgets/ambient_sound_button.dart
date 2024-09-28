@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:standby_clock/data/settings.dart';
 
 class AmbientSoundButton extends StatefulWidget {
   const AmbientSoundButton({super.key});
@@ -24,7 +25,6 @@ class _AmbientSoundButtonState extends State<AmbientSoundButton> {
     return IconButton(
       icon: Icon(
         (isPlay) ? Icons.music_off : Icons.music_note,
-        color: Theme.of(context).colorScheme.surfaceBright,
       ),
       onPressed: () async {
         if (isPlay) {
@@ -39,7 +39,7 @@ class _AmbientSoundButtonState extends State<AmbientSoundButton> {
           await player.setReleaseMode(ReleaseMode.loop);
           await player
               .play(
-            AssetSource("sound/ocean.mp3"),
+            AssetSource(settingAmbientSound),
             mode: PlayerMode.mediaPlayer,
           )
               .then((_) {
