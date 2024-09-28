@@ -93,7 +93,6 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   void saveAmbientSound(value) {
-    //
     log('sound selected : $value');
     prefs.setString('AMBIENT_SOUND', value!);
     settingAmbientSound = value;
