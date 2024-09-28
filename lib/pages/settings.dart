@@ -43,20 +43,10 @@ class _SettingPageState extends State<SettingPage> {
           ),
           DropdownMenu<String>(
             initialSelection: settingThemeMode,
-            inputDecorationTheme: InputDecorationTheme(
-              // border:
-              //     OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
+            inputDecorationTheme: const InputDecorationTheme(
               filled: true,
             ),
-            onSelected: (value) {
-              //
-              log('theme selected : ${value}');
-              final themeMode =
-                  (value == 'dark') ? ThemeMode.dark : ThemeMode.light;
-              prefs.setString('THEME_MODE', value!);
-              settingThemeMode = value;
-              Get.changeThemeMode(themeMode);
-            },
+            onSelected: saveThemeMode,
             dropdownMenuEntries: const [
               DropdownMenuEntry<String>(label: 'Light', value: 'light'),
               DropdownMenuEntry<String>(label: 'Dark', value: 'dark'),
@@ -65,6 +55,14 @@ class _SettingPageState extends State<SettingPage> {
         ],
       ),
     );
+  }
+
+  void saveThemeMode(value) {
+    log('theme selected : $value');
+    final themeMode = (value == 'dark') ? ThemeMode.dark : ThemeMode.light;
+    prefs.setString('THEME_MODE', value!);
+    settingThemeMode = value;
+    Get.changeThemeMode(themeMode);
   }
 
   Widget buildAmbientSoundSetting() {
@@ -79,17 +77,10 @@ class _SettingPageState extends State<SettingPage> {
           ),
           DropdownMenu<String>(
             initialSelection: settingAmbientSound,
-            inputDecorationTheme: InputDecorationTheme(
-              // border: OutlineInputBorder(
-              //     borderRadius: BorderRadius.circular(12.0)),
+            inputDecorationTheme: const InputDecorationTheme(
               filled: true,
             ),
-            onSelected: (value) {
-              //
-              log('sound selected : ${value}');
-              prefs.setString('AMBIENT_SOUND', value!);
-              settingAmbientSound = value;
-            },
+            onSelected: saveAmbientSound,
             dropdownMenuEntries: List.generate(listAmbientSound.length, (i) {
               return DropdownMenuEntry<String>(
                   label: listAmbientSound[i].title,
@@ -99,5 +90,12 @@ class _SettingPageState extends State<SettingPage> {
         ],
       ),
     );
+  }
+
+  void saveAmbientSound(value) {
+    //
+    log('sound selected : $value');
+    prefs.setString('AMBIENT_SOUND', value!);
+    settingAmbientSound = value;
   }
 }

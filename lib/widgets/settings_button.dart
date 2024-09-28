@@ -8,7 +8,7 @@ class SettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        icon: Icon(
+        icon: const Icon(
           Icons.settings,
         ),
         onPressed: () => buildSettingDialog(context));
