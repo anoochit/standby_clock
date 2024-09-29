@@ -8,3 +8,8 @@ Just a simple clock.
 
 ![](/screenshots/screenshot02.png)
 
+
+![](/screenshots/screenshot03.png)
+
+![](/screenshots/screenshot04.png)
+
