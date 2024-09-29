@@ -18,6 +18,7 @@ Future<void> main() async {
   // init shared preference
   await initSharePreference();
 
+  // load preference
   loadSettingsPreference();
 
   // set fullscreen for mobile platform

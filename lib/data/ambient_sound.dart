@@ -10,6 +10,10 @@ class AmbientSound {
 
 final listAmbientSound = [
   AmbientSound(
+    title: 'Beach',
+    asset: 'sound/beach.mp3',
+  ),
+  AmbientSound(
     title: 'Bonfire',
     asset: 'sound/bonfire.mp3',
   ),
@@ -18,7 +22,19 @@ final listAmbientSound = [
     asset: 'sound/coffeeshop.mp3',
   ),
   AmbientSound(
+    title: 'Forest',
+    asset: 'sound/forest.mp3',
+  ),
+  AmbientSound(
     title: 'Ocean',
     asset: 'sound/ocean.mp3',
+  ),
+  AmbientSound(
+    title: 'Raining',
+    asset: 'sound/raining.mp3',
+  ),
+  AmbientSound(
+    title: 'Train',
+    asset: 'sound/train.mp3',
   ),
 ];
