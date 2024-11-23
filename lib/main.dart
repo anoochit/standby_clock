@@ -3,23 +3,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fullscreen_window/fullscreen_window.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:standby_clock/data/settings.dart';
+import 'package:standby_clock/controllers/app_controller.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 import 'pages/home.dart';
-
-late SharedPreferences prefs;
 
 Future<void> main() async {
   // widget init
   WidgetsFlutterBinding.ensureInitialized();
 
-  // init shared preference
-  await initSharePreference();
-
-  // load preference
-  loadSettingsPreference();
+  // init controller
+  Get.put(AppController());
 
   // set fullscreen for mobile platform
   setFullScreen();
@@ -39,24 +33,14 @@ setFullScreen() {
   }
 }
 
-// init shared preference
-initSharePreference() async {
-  prefs = await SharedPreferences.getInstance();
-}
-
-loadSettingsPreference() {
-  settingThemeMode = prefs.getString('THEME_MODE') ?? 'dark';
-  settingAmbientSound = prefs.getString('AMBIENT_SOUND') ?? 'sound/ocean.mp3';
-}
-
-class MyApp extends StatelessWidget {
+class MyApp extends GetView<AppController> {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final themeMode = (settingThemeMode == 'dark')
+    final themeMode = (controller.settingThemeMode.value == 'dark')
         ? ThemeMode.dark
-        : (settingThemeMode == 'light')
+        : (controller.settingThemeMode.value == 'light')
             ? ThemeMode.light
             : ThemeMode.system;
 

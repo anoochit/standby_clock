@@ -3,35 +3,59 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:standby_clock/data/ambient_sound.dart';
-import 'package:standby_clock/main.dart';
 
-import '../data/settings.dart';
+import '../controllers/app_controller.dart';
 
-class SettingPage extends StatefulWidget {
+class SettingPage extends GetView<AppController> {
   const SettingPage({super.key});
 
   @override
-  State<SettingPage> createState() => _SettingPageState();
-}
-
-class _SettingPageState extends State<SettingPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        buildThemeSetting(),
-        buildAmbientSoundSetting(),
-      ],
+    return Obx(
+      () => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          buildThemeSetting(context),
+          buildAmbientSoundSetting(context),
+          buildSecondSetting(context)
+        ],
+      ),
     );
   }
 
-  Widget buildThemeSetting() {
+  Widget buildSecondSetting(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Show secound',
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+          DropdownMenu<bool>(
+            initialSelection: controller.settingShowSecond.value,
+            inputDecorationTheme: const InputDecorationTheme(
+              filled: true,
+            ),
+            onSelected: saveSecondMode,
+            dropdownMenuEntries: const [
+              DropdownMenuEntry<bool>(label: 'Yes', value: true),
+              DropdownMenuEntry<bool>(label: 'No', value: false),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  void saveSecondMode(value) {
+    log('second mode : $value');
+    controller.prefs.setBool('SHOW_SECOND', value);
+    controller.settingShowSecond.value = value;
+  }
+
+  Widget buildThemeSetting(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -42,7 +66,7 @@ class _SettingPageState extends State<SettingPage> {
             style: Theme.of(context).textTheme.labelLarge,
           ),
           DropdownMenu<String>(
-            initialSelection: settingThemeMode,
+            initialSelection: controller.settingThemeMode.value,
             inputDecorationTheme: const InputDecorationTheme(
               filled: true,
             ),
@@ -60,12 +84,12 @@ class _SettingPageState extends State<SettingPage> {
   void saveThemeMode(value) {
     log('theme selected : $value');
     final themeMode = (value == 'dark') ? ThemeMode.dark : ThemeMode.light;
-    prefs.setString('THEME_MODE', value!);
-    settingThemeMode = value;
+    controller.prefs.setString('THEME_MODE', value!);
+    controller.settingThemeMode.value = value;
     Get.changeThemeMode(themeMode);
   }
 
-  Widget buildAmbientSoundSetting() {
+  Widget buildAmbientSoundSetting(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -76,15 +100,16 @@ class _SettingPageState extends State<SettingPage> {
             style: Theme.of(context).textTheme.labelLarge,
           ),
           DropdownMenu<String>(
-            initialSelection: settingAmbientSound,
+            initialSelection: controller.settingAmbientSound.value,
             inputDecorationTheme: const InputDecorationTheme(
               filled: true,
             ),
             onSelected: saveAmbientSound,
             dropdownMenuEntries: List.generate(listAmbientSound.length, (i) {
               return DropdownMenuEntry<String>(
-                  label: listAmbientSound[i].title,
-                  value: listAmbientSound[i].asset);
+                label: listAmbientSound[i].title,
+                value: listAmbientSound[i].asset,
+              );
             }),
           )
         ],
@@ -94,7 +119,7 @@ class _SettingPageState extends State<SettingPage> {
 
   void saveAmbientSound(value) {
     log('sound selected : $value');
-    prefs.setString('AMBIENT_SOUND', value!);
-    settingAmbientSound = value;
+    controller.prefs.setString('AMBIENT_SOUND', value!);
+    controller.settingAmbientSound.value = value;
   }
 }

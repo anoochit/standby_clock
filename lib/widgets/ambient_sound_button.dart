@@ -2,53 +2,40 @@ import 'dart:developer';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:standby_clock/data/settings.dart';
+import 'package:get/get.dart';
 
-class AmbientSoundButton extends StatefulWidget {
+import '../controllers/app_controller.dart';
+
+class AmbientSoundButton extends GetView<AppController> {
   const AmbientSoundButton({super.key});
 
   @override
-  State<AmbientSoundButton> createState() => _AmbientSoundButtonState();
-}
-
-class _AmbientSoundButtonState extends State<AmbientSoundButton> {
-  AudioPlayer player = AudioPlayer();
-  bool isPlay = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(
-        (isPlay) ? Icons.music_off : Icons.music_note,
+    return Obx(
+      () => IconButton(
+        icon: Icon(
+          (controller.isPlay.value) ? Icons.music_off : Icons.music_note,
+        ),
+        onPressed: () async {
+          if (controller.isPlay.value) {
+            log('stop');
+            await controller.player.stop().then((_) {
+              controller.isPlay.value = false;
+            });
+          } else {
+            log('play');
+            await controller.player.setReleaseMode(ReleaseMode.loop);
+            await controller.player
+                .play(
+              AssetSource(controller.settingAmbientSound.value),
+              mode: PlayerMode.mediaPlayer,
+            )
+                .then((_) {
+              controller.isPlay.value = true;
+            });
+          }
+        },
       ),
-      onPressed: () async {
-        if (isPlay) {
-          log('stop');
-          await player.stop().then((_) {
-            setState(() {
-              isPlay = false;
-            });
-          });
-        } else {
-          log('play');
-          await player.setReleaseMode(ReleaseMode.loop);
-          await player
-              .play(
-            AssetSource(settingAmbientSound),
-            mode: PlayerMode.mediaPlayer,
-          )
-              .then((_) {
-            setState(() {
-              isPlay = true;
-            });
-          });
-        }
-      },
     );
   }
 }
