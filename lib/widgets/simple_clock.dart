@@ -28,7 +28,7 @@ class SimpleClock extends GetView<AppController> {
                     const Duration(seconds: 1),
                     (_) => DateTime.now().hour,
                   ),
-                  hingeWidth: 4.0,
+                  hingeWidth: 2.0,
                   hingeLength: 10.0,
                   itemBuilder: (buildContext, item) {
                     final value = DateFormat('HH').format(DateTime.now());
@@ -58,7 +58,7 @@ class SimpleClock extends GetView<AppController> {
                     const Duration(seconds: 1),
                     (_) => DateTime.now().minute,
                   ),
-                  hingeWidth: 4.0,
+                  hingeWidth: 2.0,
                   hingeLength: 10.0,
                   itemBuilder: (buildContext, item) {
                     final value = DateFormat('mm').format(DateTime.now());
@@ -91,7 +91,7 @@ class SimpleClock extends GetView<AppController> {
                           const Duration(seconds: 1),
                           (_) => DateTime.now().second,
                         ),
-                        hingeWidth: 4.0,
+                        hingeWidth: 2.0,
                         hingeLength: 10.0,
                         itemBuilder: (buildContext, item) {
                           final value = DateFormat('ss').format(DateTime.now());
