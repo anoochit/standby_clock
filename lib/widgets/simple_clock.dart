@@ -49,22 +49,52 @@ class SimpleClock extends GetView<AppController> {
                   flipDirection: AxisDirection.down,
                 ),
 
-                (controller.settingShowSecond.value)
-                    ? buildSeparater(context, orientation)
-                    : SizedBox(),
+                buildSeparater(context, orientation),
 
                 // minute
+                FlipWidget(
+                  flipType: FlipType.middleFlip,
+                  itemStream: Stream.periodic(
+                    const Duration(seconds: 1),
+                    (_) => DateTime.now().minute,
+                  ),
+                  hingeWidth: 4.0,
+                  hingeLength: 10.0,
+                  itemBuilder: (buildContext, item) {
+                    final value = DateFormat('mm').format(DateTime.now());
+                    return Card(
+                      color: Theme.of(context).colorScheme.surfaceContainer,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          value,
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayLarge!
+                              .apply(fontSizeFactor: 2.8),
+                        ),
+                      ),
+                    );
+                  },
+                  flipDirection: AxisDirection.down,
+                ),
+
+                (controller.settingShowSecond.value)
+                    ? buildSeparater(context, orientation)
+                    : const SizedBox(),
+
+                // sec
                 (controller.settingShowSecond.value)
                     ? FlipWidget(
                         flipType: FlipType.middleFlip,
                         itemStream: Stream.periodic(
                           const Duration(seconds: 1),
-                          (_) => DateTime.now().minute,
+                          (_) => DateTime.now().second,
                         ),
                         hingeWidth: 4.0,
                         hingeLength: 10.0,
                         itemBuilder: (buildContext, item) {
-                          final value = DateFormat('mm').format(DateTime.now());
+                          final value = DateFormat('ss').format(DateTime.now());
                           return Card(
                             color:
                                 Theme.of(context).colorScheme.surfaceContainer,
@@ -82,37 +112,7 @@ class SimpleClock extends GetView<AppController> {
                         },
                         flipDirection: AxisDirection.down,
                       )
-                    : SizedBox(),
-
-                buildSeparater(context, orientation),
-
-                // sec
-                FlipWidget(
-                  flipType: FlipType.middleFlip,
-                  itemStream: Stream.periodic(
-                    const Duration(seconds: 1),
-                    (_) => DateTime.now().second,
-                  ),
-                  hingeWidth: 4.0,
-                  hingeLength: 10.0,
-                  itemBuilder: (buildContext, item) {
-                    final value = DateFormat('ss').format(DateTime.now());
-                    return Card(
-                      color: Theme.of(context).colorScheme.surfaceContainer,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          value,
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayLarge!
-                              .apply(fontSizeFactor: 2.8),
-                        ),
-                      ),
-                    );
-                  },
-                  flipDirection: AxisDirection.down,
-                ),
+                    : const SizedBox(),
               ],
             ),
           );

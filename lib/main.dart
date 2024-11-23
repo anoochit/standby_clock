@@ -23,7 +23,6 @@ Future<void> main() async {
 }
 
 // set fullscreen for mobile platform
-// TODO : should set full screen every platforms
 setFullScreen() {
   if (Platform.isAndroid || Platform.isIOS) {
     // set fullscreen
